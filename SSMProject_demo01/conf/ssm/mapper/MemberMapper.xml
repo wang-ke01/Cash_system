@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ssm.mapper.MemberMapper">
+	<resultMap type="Member" id="mem">
+		<id column="id" property="id"/>
+		<result column="name" property="name" />
+		<result column="age" property="age"/>
+		<result column="sex" property="sex" />
+		<result column="phone" property="phone" />
+		<result column="address" property="address" />
+		<result column="hobby" property="hobby" />
+		<result column="date" property="date" />
+		<result column="remarks" property="remarks" />
+	</resultMap>
+	<!-- List<Member> getAllMembers(); -->
+	<select id="getAllMembers" resultMap="mem">
+		select * from member
+	</select>
+	
+	<!-- List<Member> getMemberByNameOrPhoto(); -->
+	<select id="getMemberByNameOrPhoto" resultMap="mem">
+		select * from member where name=#{nameorphone}
+	</select>
+	
+	<!-- boolean addMember(Member member); -->
+	<insert id="addMember">
+		insert into member values(#{id},#{name},#{age},#{sex},#{phone},#{address},#{hobby},#{date},#{remarks})
+	</insert>
+	
+	<!-- boolean deleteMember(String name) -->
+	<delete id="deleteMember">
+		delete from member where name=#{name}
+	</delete>
+	
+	<!-- Member getMemberById(String id); -->
+	<select id="getMemberById" resultType="Member">
+		select * from member where id=#{id}
+	</select>	
+	<!-- Integer updateMember(Member member); -->
+	<update id="updateMember">
+		update member 
+		set 
+		name=#{name},
+		age=#{age},
+		sex=#{sex},
+		phone=#{phone},
+		address=#{address},
+		hobby=#{hobby},
+		date=#{date},
+		remarks=#{remarks}
+		where id=#{id}
+	</update>
+	
+</mapper>
